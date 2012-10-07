@@ -8,12 +8,15 @@ colorscheme mustang
 syntax on
 
 " General settings
-set mouse=a											" enable mouse
-set number											" enable line numbers
-set autoindent									" enable autoindent
-set smartindent									" enable smartindent
-set tabstop=2										" tabs are 2 spaces long
-set hidden											" hide buffers instead of closing them
+set mouse=a                     " enable mouse
+set number                      " enable line numbers
+set autoindent                  " enable autoindent
+set smartindent                 " enable smartindent
+set tabstop=2                   " tabs are 2 spaces long
+set shiftwidth=2                " tabs are 2 spaces long
+set smarttab                    " be smart when using tabs
+set expandtab                   " create space when using tab
+set hidden                      " hide buffers instead of closing them
 set backspace=indent,eol,start	" allow backspace in insertmode
 
 " Enable filetype detection
@@ -22,11 +25,11 @@ filetype indent on
 filetype on
 
 " Search options
-set incsearch										" find the next match as we type
-set hlsearch										" highlight searches
-set ignorecase									" ignore case when searching
-set smartcase										" unless query contains at least one capital letter
-set gdefault										" add the g flag to search/replace by default
+set incsearch                   " find the next match as we type
+set hlsearch                    " highlight searches
+set ignorecase                  " ignore case when searching
+set smartcase                   " unless query contains at least one capital letter
+set gdefault                    " add the g flag to search/replace by default
 
 " Swapfiles are annoying...
 set noswapfile
