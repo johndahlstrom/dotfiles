@@ -1,0 +1,39 @@
+*faceName: Terminus:pixelsize=14
+*antialias: true
+*dpi: 96
+
+xterm*cursorColor:	#f23030
+xterm*background: #111
+xterm*foreground: #efefef
+
+!black
+*color0: #222
+*color8: #666
+
+!red
+*color1: #f23030
+*color9: #cc0000
+
+!green
+*color2: #30d630
+*color10: #30d630
+
+!yellow
+*color3: #fea63c
+*color11: #ffe863
+
+!blue
+*color4: #007ccf
+*color12: #007ccf
+
+!magenta
+*color5: #b7416e
+*color13: #e16a98
+
+!cyan
+*color6: #6d878d
+*color14: #42717b
+
+!white
+*color7: #dddddd
+*color15: #cccccc
