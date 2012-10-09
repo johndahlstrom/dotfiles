@@ -58,3 +58,8 @@ nnoremap <silent> ss <C-w>s
 
 " Close window with Q
 noremap <silent> Q <C-w>c
+
+" Lets use xclip to copy text for outside uses
+map <F1> :w !xclip -sel clip<CR><CR>
+
+

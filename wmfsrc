@@ -148,10 +148,17 @@
 
       tag    = 0  # 2nd tag
       screen = 0
-
       free       = false
       tab        = false
       ignore_tag = false
+  [/rule]
+  [rule]
+    instance = 'skype'
+    tag = 3
+  [/rule]
+  [rule]
+    instance = 'vlc'
+    tag = 4
   [/rule]
 
 [/rules]
