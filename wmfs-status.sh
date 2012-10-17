@@ -44,7 +44,7 @@ pwr(){
   if [ "$pwrsta" == "F" ]; then
     pwr="F"
   else
-    pwr="$pwrsta·$pwrperc"
+    pwr="$pwrperc$pwrsta"
   fi
   echo "^s[right;$grey;bat ]^s[right;$clear;$pwr | ]"
 }

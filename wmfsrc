@@ -53,9 +53,9 @@
 
      # client_free_statusline = ""
 
-     frame_bg = "#555555"
-     client_titlebar_width = 12
-     client_border_width = 1
+     frame_bg = "#000"
+     client_titlebar_width = 10
+     client_border_width = 2
 
    [/theme]
 
@@ -94,13 +94,13 @@
   # Use no screen option or screen = -1 to set tag on each screen
   [tag]
       screen = -1
-      name = "WEB"
+      name = "web"
   [/tag]
 
-  [tag] name = "CODE" [/tag]
-  [tag] name = "MAIL" [/tag]
-  [tag] name = "SOCIAL" [/tag]
-  [tag] name = "MEDIA" [/tag]
+  [tag] name = "code" [/tag]
+  [tag] name = "mail" [/tag]
+  [tag] name = "social" [/tag]
+  [tag] name = "media" [/tag]
 
   # Mousebinds associated to Tags element button
   [mouse] button = "1" func = "tag_click" [/mouse]
@@ -116,7 +116,7 @@
   #padding = 75
 
   # Give focus to new created client (default = false)
-  autofocus = false
+  autofocus = true
 
   theme = "default"
   key_modifier = "Super"
@@ -125,7 +125,7 @@
   #  enter : focus follow mouse (default)
   #  click : click to focus
   #  everything-else : disable mouse focus support
-  focus = enter
+  focus = click
 
   [mouse] button = "1" func = "client_focus_click"    [/mouse]
   [mouse] button = "1" func = "mouse_swap"            [/mouse]
@@ -151,6 +151,10 @@
       free       = false
       tab        = false
       ignore_tag = false
+  [/rule]
+  [rule]
+    instance = 'Mail'
+    tag = 2
   [/rule]
   [rule]
     instance = 'skype'

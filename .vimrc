@@ -14,7 +14,7 @@ set autoindent                  " enable autoindent
 set smartindent                 " enable smartindent
 set tabstop=2                   " tabs are 2 spaces long
 set shiftwidth=2                " tabs are 2 spaces long
-set smarttab                    " be smart when using tabs
+set smarttab                    " be smart when using tab
 set expandtab                   " create space when using tab
 set hidden                      " hide buffers instead of closing them
 set backspace=indent,eol,start	" allow backspace in insertmode
@@ -22,6 +22,7 @@ set backspace=indent,eol,start	" allow backspace in insertmode
 " Enable filetype detection
 filetype plugin indent on
 filetype indent on
+filetype plugin on
 filetype on
 
 " Search options
@@ -35,6 +36,11 @@ set gdefault                    " add the g flag to search/replace by default
 set noswapfile
 set nobackup
 set nowb
+
+" Source the vimrc file after saving it
+if has('autocmd')
+  autocmd bufwritepost .vimrc source $MYVIMRC
+endif
 
 " Map W and Q become w and q
 cmap W w
@@ -62,4 +68,35 @@ noremap <silent> Q <C-w>c
 " Lets use xclip to copy text for outside uses
 map <F1> :w !xclip -sel clip<CR><CR>
 
+" Update jslint and go to the next error, if there is one.
+nmap <F4> :JSLintUpdate<CR>:cn<CR>
 
+" Better navigation between windows
+map <C-j> <C-W>j
+map <C-k> <C-W>k
+map <C-h> <C-W>h
+map <C-l> <C-W>l
+
+" Easier way to make lower/uppercase letters
+map § ~
+
+" Faster way to search
+map <space> /
+
+" Easier navigation between buffers
+map <leader>ö :bNext<CR>
+map <leader>ä :bprev<CR>
+
+" Arrow keys are bad (not really but you know...)
+map <up> <nop>
+map <down> <nop>
+map <left> <nop>
+map <right> <nop>
+imap <up> <nop>
+imap <down> <nop>
+imap <left> <nop>
+imap <right> <nop>
+
+" Make Ctrl+C operate exactly like ESC. Apparently didn't work from default
+" when using block mode.
+map <C-c> <esc>

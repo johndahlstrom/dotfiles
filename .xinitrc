@@ -21,3 +21,6 @@ $HOME/.fehbg &
 
 # Run the wmfs-status.sh to make a fancy statusbar
 $HOME/.config/wmfs/wmfs-status.sh
+
+# Start dropbox as a service
+dropboxd &

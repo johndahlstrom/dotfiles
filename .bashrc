@@ -1,10 +1,3 @@
-#
-# ~/.bashrc
-#
-
-# If not running interactively, don't do anything
-#[[ $- != *i* ]] && return
-
 [ -z "$PS1" ] && return
 
 
@@ -23,12 +16,11 @@ alias ls='ls --color=auto'
 alias less='less -XF'
 alias exit='clear; exit'
 alias fire='sudo ufw status verbose'
-alias ftp='ncftp -u johndahl ftp://ftp.johndahlstrom.se'
 
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown -h 0'
 
-#Pacman
+# Pacman
 alias pacman='sudo pacman-color'
 alias pacupd='sudo pacman-color -Syu'
 alias pacrem='sudo pacman-color -Rns'
@@ -36,7 +28,6 @@ alias pacins='sudo pacman-color -S'
 alias pacsea='sudo pacman-color -Ss'
 alias paclis='sudo pacman-color -Qqet | less'
 alias paclisa='sudo pacman-color -Q | less'
-
 
 # Extract Files
 extract() {
@@ -56,10 +47,27 @@ extract() {
       *.7z)        7z x $1        ;;
       *.xz)        unxz $1        ;;
       *.exe)       cabextract $1  ;;
-      *)           echo "\`$1': unrecognized file compression" ;;
+      *)           echo "\`$1': unrecognized file compression." ;;
     esac
   else
-    echo "\`$1' is not a valid file"
+    echo "\`$1' is not a valid file."
   fi
 }
 
+# Start tmux with support for 256 colors
+alias tmux='tmux -2'
+alias tm='tmux attach || tmux new'
+
+
+# Encode video to .avi format with mp3 sound and libvcodec video codec
+encode() {
+  if [ -f $1 ] ; then
+    if [ -z $2 ] ; then
+      echo 'You need to specify a name for the output file.'
+    else
+      mencoder $1 -o $2.avi -oac mp3lame -ovc lavc
+    fi
+  else
+    echo $1' is not a valid file.'
+  fi
+}
