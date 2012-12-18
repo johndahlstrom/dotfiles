@@ -15,7 +15,8 @@
      # No name mean default
      # name = "default"
 
-     font = "-*-terminus-medium-*-*-*-13-*-*-*-*-*-*-*"
+     font = "-*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*"
+     #font = "-*-dina regular-medium-*-*-*-12-*-*-*-*-*-*-*"
 
      # Bars
      bars_width = 20
@@ -39,23 +40,23 @@
      tags_urgent_bg    = "#CC5544"
      # tags_urgent_statusline = ""
 
-     tags_border_color = "#222"
+     tags_border_color = "#000"
      tags_border_width = 1
 
      # Frame / Client
      client_normal_fg = "#efefef"
      client_normal_bg = "#000"
-     client_normal_statusline = "\s[3;9;#121212;x] \s[2;8;#ff0000;x](1;client_close)"
+     client_normal_statusline = "\s[2;8;#ff0000;x](1;client_close)"
 
      client_sel_fg = "#0174DF"
      client_sel_bg = "#000"
-     client_sel_statusline = "\s[3;9;#121212;x] \s[2;8;#ff0000;x](1;client_close)"
+     client_sel_statusline = "\s[5;10;#ff0000;x](1;client_close)"
 
      # client_free_statusline = ""
 
-     frame_bg = "#000"
-     client_titlebar_width = 10
-     client_border_width = 2
+     frame_bg = "#222"
+     client_titlebar_width = 0
+     client_border_width = 1
 
    [/theme]
 
@@ -89,17 +90,13 @@
 [tags]
 
   # Tag wrapping navigation
-  circular = false
+  circular = true
+  border = false
 
-  # Use no screen option or screen = -1 to set tag on each screen
-  [tag]
-      screen = -1
-      name = "web"
-  [/tag]
-
+  [tag] name = "web" [/tag]
   [tag] name = "code" [/tag]
-  [tag] name = "mail" [/tag]
   [tag] name = "social" [/tag]
+  [tag] name = "mail" [/tag]
   [tag] name = "media" [/tag]
 
   # Mousebinds associated to Tags element button
@@ -139,31 +136,33 @@
 [rules]
 
   [rule]
-      # use instance = "*" for a all-clients rule
-      instance = "chromium"
-
-      # role   = ""
-      # name   = ""
-      # theme  = "default"
-
-      tag    = 0  # 2nd tag
-      screen = 0
-      free       = false
-      tab        = false
-      ignore_tag = false
+    instance = "chromium"
+    tag    = 0 
+    screen = 0
+    free       = false
+    tab        = false
+    ignore_tag = false
   [/rule]
   [rule]
     instance = 'Mail'
-    tag = 2
+    tag = 3
   [/rule]
   [rule]
     instance = 'skype'
-    tag = 3
+    tag = 2
+    free = true
   [/rule]
   [rule]
     instance = 'vlc'
     tag = 4
+    free = true
   [/rule]
+  [rule]
+    instance = 'pidgin'
+    tag = 2
+    free = true
+  [/rule]
+
 
 [/rules]
 

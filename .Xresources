@@ -1,10 +1,12 @@
-*faceName: Terminus:pixelsize=14
+*faceName: Dina:pixelsize=16
 *antialias: true
 *dpi: 96
 
 xterm*cursorColor:	#f23030
 xterm*background: #111
 xterm*foreground: #efefef
+
+xterm*utf8: 1
 
 !black
 *color0: #222

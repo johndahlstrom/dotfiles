@@ -6,6 +6,7 @@ call pathogen#helptags()
 set background=dark
 colorscheme mustang
 syntax on
+set lazyredraw
 
 " General settings
 set mouse=a                     " enable mouse
@@ -41,6 +42,20 @@ set nowb
 if has('autocmd')
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
+
+if has('statusline')
+  set laststatus=2
+
+  set statusline=%<%f\ 
+  set statusline+=%w%h%m%r
+  set statusline+=\ [%{&ff}/%Y]\ 
+  set statusline+=%#warningmsg#
+  set statusline+=%*
+
+  set statusline+=%=%-14.(%l,%c%V%)\ %p%%
+endif
+
+let g:Powerline_symbols = 'fancy'
 
 " Map W and Q become w and q
 cmap W w
@@ -100,3 +115,5 @@ imap <right> <nop>
 " Make Ctrl+C operate exactly like ESC. Apparently didn't work from default
 " when using block mode.
 map <C-c> <esc>
+
+inoremap <C-P> <ESC>:call PhpDoc()<CR>i

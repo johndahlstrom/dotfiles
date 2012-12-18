@@ -1,6 +1,11 @@
 [ -z "$PS1" ] && return
 
+# Lets use vim as our favorite editor!
+export EDITOR=vim
+export VISUAL=$EDITOR
+export PATH='/bin:/usr/bin:/usr/local/bin:/usr/sbin:/sbin:/usr/local/sbin'
 
+# Colorize!
 GREEN='\e[0;32m'
 GREY='\e[1;30m'
 CYAN='\e[1;36m'
@@ -8,8 +13,10 @@ WHITE='\e[0;37m'
 RED='\e[0;31m'
 CLEAR='\e[0m'
 
+# Prompt
 PS1=$RED'\[@\w\]: '$CLEAR
 
+# Aliases
 alias vi='vim'
 alias ..='cd ..'
 alias ls='ls --color=auto'
@@ -20,7 +27,6 @@ alias fire='sudo ufw status verbose'
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown -h 0'
 
-# Pacman
 alias pacman='sudo pacman-color'
 alias pacupd='sudo pacman-color -Syu'
 alias pacrem='sudo pacman-color -Rns'
@@ -55,7 +61,7 @@ extract() {
 }
 
 # Start tmux with support for 256 colors
-alias tmux='tmux -2'
+alias tmux='tmux'
 alias tm='tmux attach || tmux new'
 
 
