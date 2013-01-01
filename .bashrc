@@ -81,3 +81,21 @@ encode() {
     echo $1' is not a valid file.'
   fi
 }
+
+# Remove all orphan packages with pacman
+cleanup() {
+  sudo pacman -Qqdt > cleanuplist
+ 
+  removelist=""
+  while read line; do
+    removelist=$removelist" "$line
+  done < "./cleanuplist"
+  echo $removelist
+  rm ./cleanuplist
+  
+  if [ -z $removelist ]; then
+    echo 'There is nothing to clean.';
+  else
+    sudo pacman -Rs $removelist
+  fi
+}
