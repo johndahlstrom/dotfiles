@@ -3,7 +3,7 @@
 
 #colors
 
-clear="#C7C7C7"
+clear="#efefef"
 grey="#0174df"
 
 # mem section

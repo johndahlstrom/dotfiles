@@ -16,7 +16,6 @@
      # name = "default"
 
      font = "-*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*"
-     #font = "-*-dina regular-medium-*-*-*-12-*-*-*-*-*-*-*"
 
      # Bars
      bars_width = 20
@@ -46,11 +45,11 @@
      # Frame / Client
      client_normal_fg = "#efefef"
      client_normal_bg = "#000"
-     client_normal_statusline = "\s[2;8;#ff0000;x](1;client_close)"
+     client_normal_statusline = "\s[5;12;#ff0000;X](1;client_close)"
 
-     client_sel_fg = "#0174DF"
-     client_sel_bg = "#000"
-     client_sel_statusline = "\s[5;10;#ff0000;x](1;client_close)"
+     client_sel_fg = "#efefef"
+     client_sel_bg = "#333"
+     client_sel_statusline = "\s[5;12;#fff;X](1;client_close)"
 
      # client_free_statusline = ""
 
@@ -122,7 +121,7 @@
   #  enter : focus follow mouse (default)
   #  click : click to focus
   #  everything-else : disable mouse focus support
-  focus = click
+  focus = enter
 
   [mouse] button = "1" func = "client_focus_click"    [/mouse]
   [mouse] button = "1" func = "mouse_swap"            [/mouse]

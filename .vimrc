@@ -20,6 +20,10 @@ set expandtab                   " create space when using tab
 set hidden                      " hide buffers instead of closing them
 set backspace=indent,eol,start	" allow backspace in insertmode
 
+" Wildmenu
+set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
+set wildignore+=*.git,*.svn
+
 " Enable filetype detection
 filetype plugin indent on
 filetype indent on
@@ -42,6 +46,14 @@ set nowb
 if has('autocmd')
   autocmd bufwritepost .vimrc source $MYVIMRC
 endif
+
+" Return to last edit position when opening files
+autocmd BufReadPost *
+  \ if line("'\"") > 0 && line("'\"") <= line("$") |
+  \   execute "normal! g`\"" |
+  \ endif
+" Remember info about open buffers on close
+set viminfo^=%
 
 if has('statusline')
   set laststatus=2
@@ -116,4 +128,32 @@ imap <right> <nop>
 " when using block mode.
 map <C-c> <esc>
 
+" Ctrl+P to document PHP code.
 inoremap <C-P> <ESC>:call PhpDoc()<CR>i
+
+" Keep search matches in the middle of the window.
+nnoremap n nzzzv
+nnoremap N Nzzzv
+
+" Same when jumping around
+nnoremap g; g;zz
+nnoremap g, g,zz
+nnoremap <c-o> <c-o>zz
+
+" Don't move on *
+nnoremap * *<c-o>
+
+" Better movement
+noremap j gj
+noremap k gk
+noremap gj j
+noremap gk k
+
+" Easier to type
+noremap H ^
+noremap L $
+vnoremap L g_
+
+" Window resize
+nnoremap <s-left> 5<c-w><
+nnoremap <s-right> 5<c-w>>

@@ -64,6 +64,10 @@ extract() {
 alias tmux='tmux'
 alias tm='tmux attach || tmux new'
 
+# Edit dotfiles
+alias evim='vim ~/.vimrc'
+alias ewmfs='vim ~/.config/wmfs/wmfsrc'
+alias ebash='vim ~/.bashrc'
 
 # Encode video to .avi format with mp3 sound and libvcodec video codec
 encode() {
