@@ -49,6 +49,16 @@ pwr(){
   echo "^s[right;$grey;bat ]^s[right;$clear;$pwr | ]"
 }
 
+volpcm(){
+  volpcm="$(amixer get Master | tail -1 | sed 's/.*\[\([0-9]*%\)\].*/\1/')"
+  if [ "$volpcm" == "100%" ]; then
+    pcm="100"
+  else
+    pcm="$(echo $volpcm | cut -c1-2)"
+  fi
+  echo "^s[right;$grey;vol ]^P[50;2;50;10;4;$pcm;100;#445544;#AABBAA]"
+}
+
 statustext()
 {
   wmfs -c status "default $(pwr) $(cpu) $(memu)$(memt) $(hdd) $(dte) $(tme)"

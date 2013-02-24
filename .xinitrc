@@ -22,14 +22,15 @@ export LANG='sv_SE.utf8'
 export PATH='/sbin:/usr/sbin:/bin:/usr/bin'
 
 # Start wmfs
-exec wmfs &
+#exec wmfs &
+exec i3 
 
 # Set the background
-$HOME/.fehbg & 
+#$HOME/.fehbg & 
 
 # Start dropbox as a service
-dropboxd &
+#dropboxd &
 
 # Run the wmfs-status.sh to make a fancy statusbar
-$HOME/.config/wmfs/wmfs-status.sh
+#$HOME/.config/wmfs/wmfs-status.sh
 

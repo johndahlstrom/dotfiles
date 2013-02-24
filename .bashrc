@@ -1,4 +1,6 @@
 [ -z "$PS1" ] && return
+# unbind stty lnext (C-v)
+stty lnext ^q stop undef start undef
 
 # Lets use vim as our favorite editor!
 export EDITOR=vim
@@ -12,9 +14,10 @@ CYAN='\e[1;36m'
 WHITE='\e[0;37m'
 RED='\e[0;31m'
 CLEAR='\e[0m'
+BACKGROUND='\e[1;40m'
 
 # Prompt
-PS1=$RED'\[@\w\]: '$CLEAR
+PS1=$GREEN'[\w]: '$CLEAR
 
 # Aliases
 alias vi='vim'
@@ -23,6 +26,7 @@ alias ls='ls --color=auto'
 alias less='less -XF'
 alias exit='clear; exit'
 alias fire='sudo ufw status verbose'
+alias thunar='dbus-launch thunar'
 
 alias reboot='sudo reboot'
 alias shutdown='sudo shutdown -h 0'

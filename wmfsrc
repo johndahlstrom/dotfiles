@@ -226,8 +226,8 @@
   [key] mod = {"Super", "Control"} key = "j" func = "client_resize_bottom" cmd = "20" [/key]
 
   # Move to different tab
-  [key] mod = {"Alt"} key = "Right" func = "tag_move_client_next" [/key]
-  [key] mod = {"Alt"} key = "Left" func = "tag_move_client_prev" [/key]
+  [key] mod = {"Alt", "Control"} key = "Right" func = "tag_move_client_next" [/key]
+  [key] mod = {"Alt", "Control"} key = "Left" func = "tag_move_client_prev" [/key]
   
   # Focus next / prev client and next / prev tabbed client
   [key] mod = { "Alt" }            key = "Tab" func = "client_focus_next" [/key]

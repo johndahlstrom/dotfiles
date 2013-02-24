@@ -93,7 +93,7 @@ nnoremap <silent> ss <C-w>s
 noremap <silent> Q <C-w>c
 
 " Lets use xclip to copy text for outside uses
-map <F1> :w !xclip -sel clip<CR><CR>
+vmap <leader>c :w !xclip -sel clip<CR><CR>
 
 " Update jslint and go to the next error, if there is one.
 nmap <F4> :JSLintUpdate<CR>:cn<CR>

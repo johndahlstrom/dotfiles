@@ -1,10 +1,12 @@
-*faceName: Dina:pixelsize=16
+xterm*vt100.translations: #override <Btn1Up>: select-end(CLIPBOARD)
+*faceName: Dina:pixelsize=14
 *antialias: true
 *dpi: 96
 
-xterm*cursorColor:	#f23030
+xterm*cursorColor: #30d630
 xterm*background: #111
 xterm*foreground: #efefef
+xterm*cursorBlink: true
 
 xterm*utf8: 1
 
@@ -39,3 +41,4 @@ xterm*utf8: 1
 !white
 *color7: #dddddd
 *color15: #cccccc
+
