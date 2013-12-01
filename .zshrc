@@ -1,12 +1,29 @@
-#
-# ~/.bashrc
-#
+# Fix PATH
+export PATH='/sbin:/usr/sbin:/bin:/usr/bin:/home/john/.gem/ruby/2.0.0/bin'
 
-# If not running interactively, don't do anything
-[[ $- != *i* ]] && return
+# The following lines were added by compinstall
 
-alias ls='ls --color=auto'
-PS1='[\u@\h \W]\$ '
+zstyle ':completion:*' completer _expand _complete _ignored _approximate
+zstyle ':completion:*' format 'Completing %d'
+zstyle ':completion:*' matcher-list 'm:{[:lower:]}={[:upper:]}'
+zstyle ':completion:*' menu select=1
+zstyle ':completion:*' select-prompt %SScrolling active: current selection at %p%s
+zstyle :compinstall filename '/home/john/.zshrc'
+
+autoload -Uz compinit
+autoload -U colors && colors
+
+compinit
+# End of lines added by compinstall
+# Lines configured by zsh-newuser-install
+HISTFILE=~/.histfile
+HISTSIZE=1000
+SAVEHIST=1000
+bindkey -e
+# End of lines configured by zsh-newuser-install
+
+PROMPT="%{$fg[blue]%}[%{$fg[white]%}%~%{$fg[blue]%}] %{$reset_color%}"
+RPROMPT="%{$fg[blue]%}[%{$fg[white]%}%*%{$fg[blue]%}] %{$reset_color%}"
 
 # Aliases
 alias ..='cd ..'
@@ -23,6 +40,12 @@ alias pacins='sudo pacman -S'
 alias pacsea='sudo pacman -Ss'
 alias paclis='sudo pacman -Qqet | less'
 alias paclisa='sudo pacman -Q | less'
+
+
+# Also fix a bunch of other keys
+bindkey '^[[H'     beginning-of-line # <Home>
+bindkey '^[[F'     end-of-line       # <End>
+
 
 # Extract Files
 extract() {
@@ -49,33 +72,3 @@ extract() {
   fi
 }
 
-# Encode video to .avi format with mp3 sound and libvcodec video codec
-encode() {
-  if [ -f $1 ] ; then
-    if [ -z $2 ] ; then
-      echo 'You need to specify a name for the output file.'
-    else
-      mencoder $1 -o $2.avi -oac mp3lame -ovc lavc
-    fi
-  else
-    echo $1' is not a valid file.'
-  fi
-}
-
-# Remove all orphan packages with pacman
-cleanup() {
-  sudo pacman -Qqdt > cleanuplist
- 
-  removelist=""
-  while read line; do
-    removelist=$removelist" "$line
-  done < "./cleanuplist"
-  echo $removelist
-  rm ./cleanuplist
-  
-  if [ -z $removelist ]; then
-    echo 'There is nothing to clean.';
-  else
-    sudo pacman -Rs $removelist
-  fi
-}
