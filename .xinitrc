@@ -18,19 +18,12 @@ xset -dpms
 xset s noblank 
 xset s off 
 
+# Fix LANG
 export LANG='sv_SE.utf8'
-export PATH='/sbin:/usr/sbin:/bin:/usr/bin'
 
-# Start wmfs
-#exec wmfs &
-exec i3 
+# Fix PATH
+export PATH='/sbin:/usr/sbin:/bin:/usr/bin:/home/john/.gem/ruby/2.0.0/bin'
 
-# Set the background
-#$HOME/.fehbg & 
-
-# Start dropbox as a service
-#dropboxd &
-
-# Run the wmfs-status.sh to make a fancy statusbar
-#$HOME/.config/wmfs/wmfs-status.sh
-
+# Start dbus and i3
+#exec dbus-launch i3
+exec i3

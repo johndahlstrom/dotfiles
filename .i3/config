@@ -8,14 +8,16 @@
 # i3 config file (v4)
 #
 # Please see http://i3wm.org/docs/userguide.html for a complete reference!
+#
+
+exec --no-startup-id nm-applet
 
 set $mod Mod4
 
 # Font for window titles. Will also be used by the bar unless a different font
 # is used in the bar {} block below. ISO 10646 = Unicode
 #font -misc-fixed-medium-r-normal--13-120-75-75-C-70-iso10646-1
-#font -*-terminus-medium-*-*-*-16-*-*-*-*-*-*-*
-font pango:Dina 10
+font pango:Terminus 9
 # The font above is very space-efficient, that is, it looks good, sharp and
 # clear in small sizes. However, if you need a lot of unicode glyphs or
 # right-to-left text rendering, you should instead use pango for rendering and
@@ -26,33 +28,25 @@ font pango:Dina 10
 floating_modifier $mod
 
 # start a terminal
-bindsym $mod+Return exec i3-sensible-terminal
+bindsym $mod+Return exec xterm -fg white -bg black
+
+bindsym $mod+BackSpace exec thunar 
 
 # kill focused window
 bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
-bindsym $mod+d exec dmenu_run -nb '#000000' -nf '#13A7EC' -fn 'Dina 14'
+bindsym $mod+d exec dmenu_run -nb '#111' -nf '#2C61D4' -fn 'Terminus-18'
 # There also is the (new) i3-dmenu-desktop which only displays applications
 # shipping a .desktop file. It is a wrapper around dmenu, so you need that
 # installed.
 # bindsym $mod+d exec --no-startup-id i3-dmenu-desktop
 
-# Multimedia keys
-bindsym XF86AudioLowerVolume exec amixer set Master 5%- 
-bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ 
-bindsym XF86AudioMute exec amixer set Master toggle
-
-bindsym XF86AudioNext exec xdotool key --window $(xdotool search --name "Spotify (Premium )?- Linux Preview"|head -n1) XF86AudioNext
-bindsym XF86AudioPrev exec xdotool key --window $(xdotool search --name "Spotify (Premium )?- Linux Preview"|head -n1) XF86AudioPrev
-bindsym XF86AudioPlay exec xdotool key --window $(xdotool search --name "Spotify (Premium )?- Linux Preview"|head -n1) XF86AudioPlay
-bindsym XF86AudioStop exec xdotool key --window $(xdotool search --name "Spotify (Premium )?- Linux Preview"|head -n1) XF86AudioStop
-
 # change focus
 bindsym $mod+j focus left
 bindsym $mod+k focus down
-bindsym $mod+i focus up
-bindsym $mod+l focus right
+bindsym $mod+l focus up
+bindsym $mod+semicolon focus right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Left focus left
@@ -64,7 +58,7 @@ bindsym $mod+Right focus right
 bindsym $mod+Shift+j move left
 bindsym $mod+Shift+k move down
 bindsym $mod+Shift+l move up
-bindsym $mod+Shift+odiaeresis move right
+bindsym $mod+Shift+semicolon move right
 
 # alternatively, you can use the cursor keys:
 bindsym $mod+Shift+Left move left
@@ -129,28 +123,39 @@ bindsym $mod+Shift+r restart
 # exit i3 (logs you out of your X session)
 bindsym $mod+Shift+e exec "i3-nagbar -t warning -m 'You pressed the exit shortcut. Do you really want to exit i3? This will end your X session.' -b 'Yes, exit i3' 'i3-msg exit'"
 
+# Multimedia keys
+bindsym XF86AudioLowerVolume exec amixer set Master 5%- 
+bindsym XF86AudioRaiseVolume exec amixer set Master 5%+ 
+bindsym XF86AudioMute exec amixer set Master toggle
+
+bindsym XF86AudioNext exec xdotool key --window $(xdotool search --name "Spotify (Premium )?- Linux Preview"|head -n1) XF86AudioNext
+bindsym XF86AudioPrev exec xdotool key --window $(xdotool search --name "Spotify (Premium )?- Linux Preview"|head -n1) XF86AudioPrev
+bindsym XF86AudioPlay exec xdotool key --window $(xdotool search --name "Spotify (Premium )?- Linux Preview"|head -n1) XF86AudioPlay
+bindsym XF86AudioStop exec xdotool key --window $(xdotool search --name "Spotify (Premium )?- Linux Preview"|head -n1) XF86AudioStop
+
+
 # resize window (you can also use the mouse for that)
 mode "resize" {
-  # These bindings trigger as soon as you enter the resize mode
-  
-  # Pressing left will shrink the window’s width.
-  # Pressing right will grow the window’s width.
-  # Pressing up will shrink the window’s height.
-  # Pressing down will grow the window’s height.
-  bindsym j resize shrink width 10 px or 10 ppt
-  bindsym k resize grow height 10 px or 10 ppt
-  bindsym i resize shrink height 10 px or 10 ppt
-  bindsym l resize grow width 10 px or 10 ppt
-  
-  #bindings, but for the arrow keys
-  bindsym Left resize shrink width 10 px or 10 ppt
-  bindsym Down resize grow height 10 px or 10 ppt
-  bindsym Up resize shrink height 10 px or 10 ppt
-  bindsym Right resize grow width 10 px or 10 ppt
-  
-  # back to normal: Enter or Escape
-  bindsym Return mode "default"
-  bindsym Escape mode "default"
+        # These bindings trigger as soon as you enter the resize mode
+
+        # Pressing left will shrink the window’s width.
+        # Pressing right will grow the window’s width.
+        # Pressing up will shrink the window’s height.
+        # Pressing down will grow the window’s height.
+        bindsym j resize shrink width 10 px or 10 ppt
+        bindsym k resize grow height 10 px or 10 ppt
+        bindsym l resize shrink height 10 px or 10 ppt
+        bindsym semicolon resize grow width 10 px or 10 ppt
+
+        # same bindings, but for the arrow keys
+        bindsym Left resize shrink width 10 px or 10 ppt
+        bindsym Down resize grow height 10 px or 10 ppt
+        bindsym Up resize shrink height 10 px or 10 ppt
+        bindsym Right resize grow width 10 px or 10 ppt
+
+        # back to normal: Enter or Escape
+        bindsym Return mode "default"
+        bindsym Escape mode "default"
 }
 
 bindsym $mod+r mode "resize"
@@ -158,12 +163,38 @@ bindsym $mod+r mode "resize"
 # Start i3bar to display a workspace bar (plus the system information i3status
 # finds out, if available)
 bar {
-  font pango:Dina 10
   position top
-  status_command ~/.i3/conky-i3bar
+  status_command $HOME/.i3/bar
+
   colors {
     background #000000
-    statusline #efefef
+    statusline #EFEFEF
+    separator #2C61D4
+    
+    # class            border  backgr. text
+    focused_workspace  #2C61D4 #2C61D4 #EFEFEF
+    active_workspace   #333333 #2C61D4 #EFEFEF
+    inactive_workspace #333333 #222222 #888888
+    urgent_workspace   #2C61D4 #2DB7D6 #EFEFEF
   }
-
 }
+
+
+# class                 border  backgr. text    indicator
+client.focused          #111111 #000000 #2C61D4 #2e9ef4
+client.focused_inactive #111111 #000000 #888888 #484e50
+client.unfocused        #111111 #000000 #888888 #292d2e
+client.urgent           #2f343a #900000 #ffffff #900000
+
+
+for_window [title="Thunar"] floating enable
+for_window [title="VirtualBox"] floating enable
+for_window [title="^Imperian$"] floating enable
+for_window [title="^Beta$"] floating enable
+for_window [title="^Frost$"] floating enable
+for_window [title="^Aetolia$"] floating enable
+for_window [title="^spotify$"] floating enable
+for_window [title="Skype"] floating enable
+for_window [title="PlayOnLinux"] floating enable
+for_window [title="^feh"] floating enable
+
