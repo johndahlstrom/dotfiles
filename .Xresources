@@ -1,38 +1,22 @@
 xterm*vt100.translations: #override <Btn1Up>: select-end(CLIPBOARD)
 
-*faceName: Terminus:pixelsize=10
+*faceName: terminus:pixelsize=10
 *antialias: true
-*dpi: 96
 
-!black
-*color0: #222222
-*color8: #666666
 
-!red
-*color1: #D42C2C
-*color9: #D42C2C
-
-!green
-*color2: #2CD442
-*color10: #2CD442
-
-!yellow
-*color3: #DAE02D
-*color11: #DAE02D
-
-!blue
-*color4: #2C61D4
-*color12: #2C61D4
-
-!magenta
-*color5: #B22DD6
-*color13: #B22DD6
-
-!cyan
-*color6: #2DB7D6
-*color14: #2DB7D6
-
-!white
-*color7: #EFEFEF
-*color15: #DDDDDD
-
+*color0: #1C1D19
+*color1: #D01B24
+*color2: #A7D32C
+*color3: #D8CF67
+*color4: #61B8D0
+*color5: #695ABB
+*color6: #D53864
+*color7: #FEFFFE
+*color8: #1C1D19
+*color9: #D12A24
+*color10: #A7D32C
+*color11: #D8CF67
+*color12: #61B8D0
+*color13: #695ABB
+*color14: #D53864
+*color15: #FEFFFE

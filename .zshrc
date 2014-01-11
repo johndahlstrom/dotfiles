@@ -41,6 +41,8 @@ alias pacsea='sudo pacman -Ss'
 alias paclis='sudo pacman -Qqet | less'
 alias paclisa='sudo pacman -Q | less'
 
+alias tm='tmux -2'
+
 
 # Also fix a bunch of other keys
 bindkey '^[[H'     beginning-of-line # <Home>

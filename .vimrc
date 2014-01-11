@@ -18,6 +18,10 @@ Bundle 'scrooloose/syntastic'
 Bundle 'evidens/vim-twig'
 Bundle 'rhysd/clever-f.vim'
 Bundle 'Lokaltog/vim-easymotion'
+Bundle 'christoomey/vim-tmux-navigator'
+Bundle 'avakhov/vim-yaml'
+Bundle 'Shougo/unite.vim'
+
 
 
 " Source the vimrc file after saving it
@@ -27,7 +31,7 @@ endif
 
 syntax on
 set number
-colorscheme mustang
+colorscheme monokai
 
 set tabstop=2
 set shiftwidth=2
@@ -81,12 +85,6 @@ vnoremap <leader>p "_dP
 " Easy window split
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
-
-" Better navigation between windows
-map <C-j> <C-W>j
-map <C-k> <C-W>k
-map <C-h> <C-W>h
-map <C-l> <C-W>l
 
 " Copy with xclip
 map <leader>c :w !xclip -sel clip<CR><CR>
