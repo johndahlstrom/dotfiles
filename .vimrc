@@ -5,22 +5,26 @@ call vundle#rc()
 Bundle 'gmarik/vundle'
 
 Bundle 'Lokaltog/vim-easymotion'
-Bundle 'maciakl/vim-neatstatus'
+"Bundle 'maciakl/vim-neatstatus'
 Bundle 'ervandew/supertab'
-Bundle 'SirVer/ultisnips'
+"Bundle 'SirVer/ultisnips'
 Bundle 'tpope/vim-surround'
 Bundle 'scrooloose/nerdtree'
 Bundle 'kien/ctrlp.vim'
 Bundle 'tpope/vim-commentary'
-Bundle 'conormcd/matchindent.vim'
 Bundle 'tpope/vim-repeat'
 Bundle 'scrooloose/syntastic'
 Bundle 'evidens/vim-twig'
 Bundle 'rhysd/clever-f.vim'
-Bundle 'Lokaltog/vim-easymotion'
-Bundle 'christoomey/vim-tmux-navigator'
+"Bundle 'christoomey/vim-tmux-navigator'
 Bundle 'avakhov/vim-yaml'
-Bundle 'Shougo/unite.vim'
+Bundle "MarcWeber/vim-addon-mw-utils"
+Bundle "tomtom/tlib_vim"
+Bundle "garbas/vim-snipmate"
+Bundle "honza/vim-snippets"
+Bundle "jaxbot/brolink.vim"
+Bundle "beyondwords/vim-twig"
+Bundle "tokutake/twig-indent"
 
 
 
@@ -31,7 +35,9 @@ endif
 
 syntax on
 set number
-colorscheme monokai
+set t_Co=256
+set background=dark
+colorscheme molokai
 
 set tabstop=2
 set shiftwidth=2
@@ -118,6 +124,9 @@ set viminfo^=%
 " if php file, enable html syntaxes
 au BufNewFile,BufRead * if &ft == 'php' | set ft=php.html | endif
 
+" if twig file, enable twig syntaxes
+autocmd BufNewFile,BufRead *.html.twig set ft=html.twig
+
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
 nnoremap N Nzzzv
@@ -147,4 +156,14 @@ nnoremap <s-right> 5<c-w>>
 
 " Easymotion
 let g:EasyMotion_leader_key = '<Leader>'
+
+
+fun! GetSnipsInCurrentScope() 
+  let snips = {} 
+  for scope in [bufnr('%')] + split(&ft, '\.') + ['_'] 
+    call extend(snips, get(s:snippets, scope, {}), 'keep') 
+    call extend(snips, get(s:multi_snips, scope, {}), 'keep') 
+  endfor 
+  return snips 
+endf 
 
