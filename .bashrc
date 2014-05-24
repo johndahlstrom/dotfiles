@@ -62,6 +62,8 @@ case "$TERM" in
         ;;
 esac
 
+export TERM="screen-256color"
+
 # enable color support of ls and also add handy aliases
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
@@ -79,31 +81,32 @@ alias ..='cd ..'
 alias ls='ls --color=auto'
 alias less='less -XF'
 alias tm='tmux -2'
+alias tmux='tmux -2'
 
 
 # Extract Files
 extract() {
   if [ -f $1 ] ; then
     case $1 in
-      *.tar.bz2)   tar xvjf $1    ;;  
-      *.tar.gz)    tar xvzf $1    ;;  
-      *.tar.xz)    tar xvJf $1    ;;  
-      *.bz2)       bunzip2 $1     ;;  
-      *.rar)       unrar x $1     ;;  
-      *.gz)        gunzip $1      ;;  
-      *.tar)       tar xvf $1     ;;  
-      *.tbz2)      tar xvjf $1    ;;  
-      *.tgz)       tar xvzf $1    ;;  
-      *.zip)       unzip $1       ;;  
-      *.Z)         uncompress $1  ;;  
-      *.7z)        7z x $1        ;;  
-      *.xz)        unxz $1        ;;  
-      *.exe)       cabextract $1  ;;  
+      *.tar.bz2)   tar xvjf $1    ;;
+      *.tar.gz)    tar xvzf $1    ;;
+      *.tar.xz)    tar xvJf $1    ;;
+      *.bz2)       bunzip2 $1     ;;
+      *.rar)       unrar x $1     ;;
+      *.gz)        gunzip $1      ;;
+      *.tar)       tar xvf $1     ;;
+      *.tbz2)      tar xvjf $1    ;;
+      *.tgz)       tar xvzf $1    ;;
+      *.zip)       unzip $1       ;;
+      *.Z)         uncompress $1  ;;
+      *.7z)        7z x $1        ;;
+      *.xz)        unxz $1        ;;
+      *.exe)       cabextract $1  ;;
       *)           echo "\`$1': unrecognized file compression." ;;
     esac
   else
     echo "\`$1' is not a valid file."
-  fi  
+  fi
 }
 
 # Encode video to .avi format with mp3 sound and libvcodec video codec
@@ -117,13 +120,7 @@ encode() {
   else
     echo $1' is not a valid file.'
   fi
-} 
-
-
-# Add an "alert" alias for long running commands.  Use like so:
-#   sleep 10; alert
-alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
-
+}
 
 # Configure colors, if available.
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
@@ -174,5 +171,6 @@ junk_check ()
 }
 
 # Thy holy prompt.
-PROMPT_COMMAND='PS1="\[\e]2;\u@\h:\w\a\]${c_path}\w${c_reset}$(git_prompt)$(jobs_check)$(junk_check): "'
+PROMPT_COMMAND='PS1="\[\e[0;31m\]┌─[\t] \[\e]2;\u@\h:\w\a\]${c_path}\w${c_reset}$(git_prompt)$(jobs_check)$(junk_check)\n\[\e[0;31m\]└──\[\e[0;31m\]──╼\[\e[0m\]  "'
+#PS1="\[\e[01;37m\]┌─[\t][$]: \w\[\e[01;37m\]\n\[\e[01;37m\]└──\[\e[01;37m\]──╼\[\e[0m\] "
 

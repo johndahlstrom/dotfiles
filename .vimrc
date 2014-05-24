@@ -1,43 +1,66 @@
-set rtp+=~/.vim/bundle/vundle/
-call vundle#rc()
+set nocompatible
+filetype off
+
+set rtp+=~/.vim/bundle/Vundle.vim/
+call vundle#begin()
 
 
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/Vundle.vim'
 
-Bundle 'Lokaltog/vim-easymotion'
-"Bundle 'maciakl/vim-neatstatus'
-Bundle 'ervandew/supertab'
-"Bundle 'SirVer/ultisnips'
-Bundle 'tpope/vim-surround'
-Bundle 'scrooloose/nerdtree'
-Bundle 'kien/ctrlp.vim'
-Bundle 'tpope/vim-commentary'
-Bundle 'tpope/vim-repeat'
-Bundle 'scrooloose/syntastic'
-Bundle 'evidens/vim-twig'
-Bundle 'rhysd/clever-f.vim'
-"Bundle 'christoomey/vim-tmux-navigator'
-Bundle 'avakhov/vim-yaml'
-Bundle "MarcWeber/vim-addon-mw-utils"
-Bundle "tomtom/tlib_vim"
-Bundle "garbas/vim-snipmate"
-Bundle "honza/vim-snippets"
-Bundle "jaxbot/brolink.vim"
-Bundle "beyondwords/vim-twig"
-Bundle "tokutake/twig-indent"
+Plugin 'ervandew/supertab'
+Plugin 'Lokaltog/vim-easymotion'
+Plugin 'tpope/vim-surround'
+Plugin 'scrooloose/nerdtree'
+Plugin 'kien/ctrlp.vim'
+Plugin 'tpope/vim-commentary'
+Plugin 'tpope/vim-repeat'
+Plugin 'scrooloose/syntastic'
+Plugin 'evidens/vim-twig'
+Plugin 'tokutake/twig-indent'
+Plugin 'chase/vim-ansible-yaml'
+Plugin 'rhysd/clever-f.vim'
+Plugin 'airblade/vim-gitgutter'
+Plugin 'matze/vim-move'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+Plugin 'honza/vim-snippets'
+Plugin 'tmhedberg/matchit'
+Plugin 'xolox/vim-session'
+Plugin 'xolox/vim-misc'
+Plugin 'Townk/vim-autoclose'
+Plugin 'terryma/vim-multiple-cursors'
+Plugin 'sickill/vim-monokai'
+Plugin 'altercation/vim-colors-solarized'
 
 
+call vundle#end()
 
-" Source the vimrc file after saving it
-if has('autocmd')
-  autocmd bufwritepost .vimrc source $MYVIMRC
-endif
+" Enable filetype detection
+filetype plugin indent on
+
+let g:move_key_modifier = 'C'
+let g:session_autosave = 'no'
 
 syntax on
 set number
 set t_Co=256
+colorscheme solarized
 set background=dark
-colorscheme molokai
+set ttyfast
+set laststatus=2
+set showcmd
+set showmode
+set ruler
+set autoread
+set encoding=utf-8 nobomb
+
+" Fix GitGutter to be readable
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=red
+highlight GitGutterChangeDelete ctermfg=yellow
 
 set tabstop=2
 set shiftwidth=2
@@ -45,12 +68,15 @@ set smarttab
 set expandtab
 set hidden
 
-" Enable filetype detection
-filetype plugin indent on
 
 " Wildmenu
+set wildmenu
 set wildignore+=*.jpg,*.bmp,*.gif,*.png,*.jpeg
 set wildignore+=*.git,*.svn
+set wildignore+=*/vendor/**
+set wildignore+=*/app/cache/**
+set wildignore+=*/app/logs/**
+set wildignore+=*/node_modules/**
 
 " Search options
 set incsearch                   " find the next match as we type
@@ -64,11 +90,13 @@ set noswapfile
 set nobackup
 set nowb
 
-" Map W and Q become w and q
-cmap W w
-cmap Q q
+" Make :W and :Q aliases of :w and :q.
+command! W w
+command! Q q
+command! Wq wq
+command! WQ wq
 
-" Map leader to ,
+ " Map leader to ,
 let mapleader = ","
 
 " Map space to search and ctrl-space
@@ -76,6 +104,9 @@ nmap <space> /
 
 " Clear current search highlight by double tapping //
 nmap <silent> // :nohlsearch<cr>
+
+" Toggle pasting.
+map <leader>pp :setlocal paste!<cr>
 
 " Reselect visual block after indent/outdent.
 vnoremap < <gv
@@ -92,33 +123,24 @@ vnoremap <leader>p "_dP
 nnoremap <silent> vv <C-w>v
 nnoremap <silent> ss <C-w>s
 
+" Scroll viewport faster.
+nnoremap <c-e> 3<C-e>
+nnoremap <c-y> 3<C-y>
+
 " Copy with xclip
 map <leader>c :w !xclip -sel clip<CR><CR>
 
 " Nerdtree options and mappings
 let g:NERDTreeDirArrows=0
-map <C-n> :NERDTreeToggle<CR>
 let NERDTreeShowHidden=1
+map <leader>e :NERDTreeToggle<CR>
 
-" Tabular bindings
-if exists(":Tabularize")
-  nmap <Leader>a= :Tabularize /=<CR>
-  vmap <Leader>a= :Tabularize /=<CR>
-  nmap <Leader>a: :Tabularize /:\zs<CR>
-  vmap <Leader>a: :Tabularize /:\zs<CR>
-endif
-
-" UltiSnips settings
-let g:UltiSnipsExpandTrigger='<tab>'
-let g:UltiSnipsJumpForwardTrigger='<c-l>'
-let g:UltiSnipsJumpBackwardTrigger='<c-k>'
-
-" Return to last edit position when opening files 
-autocmd BufReadPost *   
-      \ if line("'\"") > 0 && line("'\"") <= line("$") |   
+" Return to last edit position when opening files
+autocmd BufReadPost *
+      \ if line("'\"") > 0 && line("'\"") <= line("$") |
       \   execute "normal! g`\"" |
-      \ endif 
-" Remember info about open buffers on close 
+      \ endif
+" Remember info about open buffers on close
 set viminfo^=%
 
 " if php file, enable html syntaxes
@@ -126,6 +148,10 @@ au BufNewFile,BufRead * if &ft == 'php' | set ft=php.html | endif
 
 " if twig file, enable twig syntaxes
 autocmd BufNewFile,BufRead *.html.twig set ft=html.twig
+
+" Remove trailing whitespace
+autocmd BufWritePre *.* :%s/\s\+$//e
+autocmd BufWritePost *.* :%s/\s\+$//e
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -154,16 +180,18 @@ vnoremap L g_
 nnoremap <s-left> 5<c-w><
 nnoremap <s-right> 5<c-w>>
 
+" Switch between buffers
+nmap <Tab> :bnext<CR>
+nmap <S-Tab> :bprevious<CR>
+
 " Easymotion
 let g:EasyMotion_leader_key = '<Leader>'
 
+" Run codeception
+nmap <C-t> :!php codecept.phar run --steps<CR>
 
-fun! GetSnipsInCurrentScope() 
-  let snips = {} 
-  for scope in [bufnr('%')] + split(&ft, '\.') + ['_'] 
-    call extend(snips, get(s:snippets, scope, {}), 'keep') 
-    call extend(snips, get(s:multi_snips, scope, {}), 'keep') 
-  endfor 
-  return snips 
-endf 
+" Better omni-complete menu.
+set completeopt=menu,preview
 
+" C-f to search for functions/tags (thanks to the Ctrl-P plugin)
+map <C-f> :CtrlPBufTag<CR>
