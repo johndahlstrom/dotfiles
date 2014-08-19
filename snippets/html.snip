@@ -1,0 +1,171 @@
+snippet html
+  <!DOCTYPE html>
+  <html>
+    <head>
+      <meta http-equiv="content-type" content="text/html; charset=utf-8">
+      <title>${1}</title>
+      <link rel="stylesheet" href="${3}.css" type="text/css" charset="utf-8">
+      ${5}
+    </head>
+    <body>
+      ${6}
+    </body>
+      ${7}
+  </html>
+
+snippet script
+    <script type="text/javascript">
+    ${1:TARGET}
+    </script>${2}
+
+snippet body
+    <body>
+       ${1:TARGET}
+    </body>
+
+snippet h
+options word
+    <h${1:1}>${2}</h$1>${3}
+
+snippet p
+options word
+    <p>${1}</p>${2}
+
+snippet br
+options word
+    <br />
+
+snippet hr
+options word
+    <hr />
+
+snippet comment
+options word
+    <!--${1:TARGET}-->${2}
+
+snippet b
+options word
+    <b>${1:TARGET}</b>${2}
+
+snippet small
+options word
+    <small>${1:TARGET}</small>${2}
+
+snippet strong
+options word
+    <strong>${1:TARGET}</strong>${2}
+
+snippet sub
+options word
+    <sub>${1:TARGET}</sub>${2}
+
+snippet sup
+options word
+    <sup>${1:TARGET}</sup>${2}
+
+snippet ins
+options word
+    <ins>${1:TARGET}</ins>${2}
+
+snippet del
+options word
+    <del>${1:TARGET}</del>${2}
+
+snippet em
+options word
+    <em>${1:TARGET}</em>${2}
+
+snippet pre
+    <pre>
+    ${1:TARGET}
+    </pre>${2}
+snippet blockquote
+    <blockquote>
+    ${1}
+    </blockquote>
+    ${2}
+
+snippet a
+options word
+    <a href="${1}">${2:TARGET}</a>${3}
+
+snippet ablank
+options word
+    <a href="${1}" target="_blank">${2:TARGET}</a>${3}
+
+snippet aparent
+options word
+    <a href="${1}" target="_parent">${2:TARGET}</a>${3}
+
+snippet atop
+options word
+    <a href="${1}" target="_top">${2:TARGET}</a>${3}
+
+snippet iframe
+options word
+    <iframe src="${1}"></iframe>${2}
+
+snippet table
+    <table border="${1}">
+    ${2:TARGET}
+    </table>${3}
+
+snippet th
+options word
+    <th>${1:TARGET}</th>${2}
+
+snippet ul
+options word
+    <ul>
+      ${1:TARGET}
+    </ul>${2}
+
+snippet li
+options word
+    <li>${1:TARGET}</li>${2}
+
+snippet form
+    <form>
+      ${1:TARGET}
+    </form>${2}
+
+snippet inputtext
+options word
+    <input type="${1:type}" name="${2:user}">${0}
+
+snippet inputradio
+options word
+    <input type="radio" name="${1}" value="${2:value}">${3}
+
+snippet inputcheckbox
+options word
+    <input type="checkbox" name="${1}">${2}
+
+snippet label
+options word
+    <label>${1}: <input type="${2:TARGET}" /><label>${3}
+
+snippet labelfor
+options word
+    <label for="${1}:id">${2:TARGET}</label>${3}
+
+snippet id
+options word
+    id="${1}"${2}
+
+snippet class
+options word
+    class="${1}"${2}
+
+snippet div#
+options word
+    <div id="${1}">${2:TARGET}</div>${3}
+
+snippet div.
+options word
+    <div class="${1}">${2:TARGET}</div>${3}
+
+snippet img
+options word
+    <img src="${1}">${2}
+

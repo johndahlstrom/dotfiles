@@ -1,0 +1,22 @@
+snippet bl
+  {% block ${1} %}
+    ${2}
+  {% endblock $1 %}${0}
+
+snippet if
+  {% if ${1} %}
+    ${2}
+  {% endif %}${0}
+
+snippet elseif
+  {% elseif ${1} %}
+    ${2}
+
+snippet else
+  {% else %}
+    ${1}
+
+snippet for
+  {% for ${1} in ${2} %}
+    ${3}
+  {% endfor %}${0}

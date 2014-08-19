@@ -11,4 +11,7 @@ echo "Done!"
 echo "Installing Vim plugins through Vundle..."
 vim +PluginInstall +qall
 
+echo "Putting snippets into place"
+cp -vr ./snippets ~/.vim/
+
 echo "All Done!"
