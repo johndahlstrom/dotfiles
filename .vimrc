@@ -28,6 +28,8 @@ Plugin 'altercation/vim-colors-solarized'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet.vim'
 
+
+
 call vundle#end()
 
 " Enable filetype detection
@@ -46,6 +48,8 @@ set autoread
 set encoding=utf-8 nobomb
 set backspace=indent,eol,start
 set cursorline
+set autoindent
+set copyindent
 
 
 
@@ -63,7 +67,9 @@ let g:neocomplete#enable_smart_case = 1
 let g:neosnippet#snippets_directory='~/.vim/snippets'
 
 " <TAB>: completion.
-inoremap <expr><TAB> pumvisible() ? "\<C-n>" : "\<TAB>"
+inoremap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+  \ "\<Plug>(neosnippet_expand_or_jump)"
+  \: pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>, <CR>: close popup and delete backword char.
 inoremap <expr><C-h> neocomplete#smart_close_popup().'\<C-h>'
 inoremap <expr><BS> neocomplete#smart_close_popup().'\<C-h>'
@@ -257,6 +263,5 @@ map <leader>evimrc :e ~/.vimrc<CR>
 " lets make escape a little more accessible
 inoremap jj <esc>
 
-
-" highlight last inserted text
-nnoremap gV `[v`]
+" Faster save
+nmap <leader>w :w<cr>
