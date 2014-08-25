@@ -67,7 +67,7 @@ let g:neocomplete#enable_smart_case = 1
 let g:neosnippet#snippets_directory='~/.vim/snippets'
 
 " <TAB>: completion.
-inoremap <expr><TAB> neosnippet#expandable_or_jumpable() ?
+imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
   \ "\<Plug>(neosnippet_expand_or_jump)"
   \: pumvisible() ? "\<C-n>" : "\<TAB>"
 " <C-h>, <BS>, <CR>: close popup and delete backword char.
