@@ -22,12 +22,15 @@ Plugin 'airblade/vim-gitgutter'
 Plugin 'matze/vim-move'
 Plugin 'tmhedberg/matchit'
 Plugin 'Townk/vim-autoclose'
-Plugin 'terryma/vim-multiple-cursors'
 Plugin 'sickill/vim-monokai'
+Plugin 'kris89/vim-multiple-cursors'
 Plugin 'altercation/vim-colors-solarized'
 Plugin 'Shougo/neocomplete.vim'
 Plugin 'Shougo/neosnippet.vim'
 
+Plugin 'guns/xterm-color-table.vim'
+
+Plugin 'adoy/vim-php-refactoring-toolbox'
 
 
 call vundle#end()
@@ -38,7 +41,7 @@ filetype plugin indent on
 syntax on
 set number
 set t_Co=256
-colorscheme monokai
+colorscheme arthur
 set ttyfast
 set laststatus=2
 set showcmd
@@ -50,8 +53,6 @@ set backspace=indent,eol,start
 set cursorline
 set autoindent
 set copyindent
-
-
 
 " tell it to use an undo file
 set undofile
@@ -85,21 +86,13 @@ if has('conceal')
 endif
 
 
-function! InsertStatuslineColor(mode)
-  if a:mode == 'i'
-    hi statusline guibg=Cyan ctermbg=blue guifg=Black ctermfg=white
-  elseif a:mode == 'r'
-    hi statusline guibg=Purple ctermfg=5 guifg=Black ctermbg=0
-  else
-    hi statusline guibg=DarkRed ctermfg=1 guifg=Black ctermbg=0
-  endif
-endfunction
-
-au InsertEnter * call InsertStatuslineColor(v:insertmode)
-au InsertLeave * hi statusline guibg=DarkGrey ctermbg=8 guifg=White ctermfg=15
-
 " default the statusline to green when entering Vim
-hi statusline guibg=DarkGrey ctermbg=8 guifg=White ctermfg=15
+hi statusline ctermbg=236 ctermfg=255
+
+" Change color on the statusline when we enter/leave insert mode
+au InsertEnter * hi statusline ctermbg=108 ctermfg=255
+au InsertLeave * hi statusline ctermbg=236 ctermfg=255
+
 
 " Formats the statusline
 set statusline=\ \ \ \ %f               " file name
@@ -185,7 +178,7 @@ nnoremap <c-e> 3<C-e>
 nnoremap <c-y> 3<C-y>
 
 " Copy with xclip
-map <leader>c :w !xclip -sel clip<CR><CR>
+map <leader>c :w !pbcopy<CR><CR>
 
 " Return to last edit position when opening files
 autocmd BufReadPost *
@@ -204,6 +197,13 @@ autocmd BufNewFile,BufRead *.html.twig set ft=html.twig
 " Remove trailing whitespace
 autocmd BufWritePre *.* :%s/\s\+$//e
 autocmd BufWritePost *.* :%s/\s\+$//e
+
+autocmd BufWrite *.php NeoSnippetSource ~/.vim/snippets/php.snip
+autocmd BufNewFile,BufRead,BufWrite *.html NeoSnippetSource ~/.vim/snippets/html.snip
+autocmd BufNewFile,BufRead,BufWrite *.twig NeoSnippetSource ~/.vim/snippets/twig.snip
+autocmd BufNewFile,BufRead,BufWrite *.js NeoSnippetSource ~/.vim/snippets/javascript.snip
+
+autocmd BufNewFile,BufRead,BufWrite php.snip NeoSnippetSource ~/.vim/snippets/php.snip
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -245,6 +245,7 @@ let NERDTreeShowHidden=1
 map <C-e> :NERDTreeToggle<CR>
 
 " Run codeception
+nmap <C-d> :!php codecept.phar run --steps --debug<CR>
 nmap <C-t> :!php codecept.phar run --steps<CR>
 
 " Better omni-complete menu.
@@ -254,14 +255,63 @@ set completeopt=menu,preview
 map <C-f> :CtrlPBufTag<CR>
 
 " Symfony, clear cache
-map <leader>cc :!php app/console cache:clear<CR>
+map <leader>cc :!rm -Rv app/cache/*<CR>
+
 
 " Source and edit vimrc
 map <leader>vimrc :so ~/.vimrc<CR>
 map <leader>evimrc :e ~/.vimrc<CR>
+
+" Edit snippets
+map <leader>ephp :e ~/.vim/snippets/php.snip<CR>
+map <leader>ehtml :e ~/.vim/snippets/html.snip<CR>
+map <leader>ejs :e ~/.vim/snippets/javascript.snip<CR>
+map <leader>etwig :e ~/.vim/snippets/twig.snip<CR>
 
 " lets make escape a little more accessible
 inoremap jj <esc>
 
 " Faster save
 nmap <leader>w :w<cr>
+
+let g:gitgutter_max_signs=9999999999
+
+" replace currently selected text
+vmap <Leader>r "sy:%s/<C-R>"/
+
+
+" Run PhpSpec
+map <leader>ps :!php bin/phpspec run --format=pretty<CR>
+
+" switch between controller and spec file
+map <leader>sw :SwitchBetweenControllerAndSpec<CR>
+
+command! SwitchBetweenControllerAndSpec call SwitchBetweenControllerAndSpec()
+
+function! SwitchBetweenControllerAndSpec()
+    let path = expand('%:p')
+    let srcpath = './src'
+    let specpath = './spec'
+    " are we in a spec file?
+    let matches = matchlist(path, printf('^%s\(.\+\)Spec\.php$', fnamemodify(specpath, ':p')))
+    if len(matches) > 0
+      let file = fnamemodify(printf('%s/%s.php', srcpath, matches[1]), ':p')
+      if bufexists(file)
+        execute(printf('buffer %s', file))
+        return
+      endif
+      execute(printf('edit %s', file))
+    endif
+    " are we in a php file?
+    let matches = matchlist(path, printf('^%s\(.\+\)\.php$', fnamemodify(srcpath, ':p')))
+    if len(matches) > 0
+      let file = fnamemodify(printf('%s/%sSpec.php', specpath, matches[1]), ':p')
+      if bufexists(file)
+        execute(printf('buffer %s', file))
+        return
+      endif
+      execute(printf('edit %s', file))
+    endif
+    echo 'Current file is not a spec nor php file.'
+endfunction
+
