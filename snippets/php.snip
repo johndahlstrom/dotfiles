@@ -3,50 +3,55 @@ snippet php
     ${1}
 
 snippet func
-  function (${1:#:param}) {
-    ${2:#:code}
-  }${0}
+
+  function ${1}(${2}) {
+    ${3}
+  }
 
 snippet this
   $this->${0}
 
 snippet if
-	if (${1:#:cond}) {
-		${2:#:code}
-	}${0}
+
+  if (${1}) {
+    ${2}
+  }
 
 snippet elseif
-	elseif (${1:#:cond}) {
-		${2:#:code}
-	}${0}
+
+  elseif (${1}) {
+    ${2}
+  }
 
 snippet else
-	else {
-		${1:#:code}
-	}${0}
+
+  else {
+    ${1}
+  }
 
 snippet if?
-  $${1:#:varName} = (${2:#:cond}) ? ${3:#:a} : ${4:#:b};
+  $${1} = (${2}) ? ${3} : ${4};
 
 snippet fore
+
   foreach ($${1} as $${2}) {
     ${3}
   }
 
 snippet echo
-  echo "${1:#:string}";${0}
+  echo "${1}";
 
 snippet get
-  $_GET['${1:#:variable}']
+  $_GET['${1}']
 
 snippet post
-  $_POST['${1:#:variable}']
+  $_POST['${1}']
 
 snippet request
-  $_REQUEST['${1:#:variable}']
+  $_REQUEST['${1}']
 
 snippet server
-  $_SERVER['${1:#:variable}']
+  $_SERVER['${1}']
 
 snippet session
-  $_SESSION['${1:#:variable}']
+  $_SESSION['${1}']
