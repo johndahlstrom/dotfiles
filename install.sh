@@ -2,6 +2,8 @@ echo "Moving files to home directory..."
 cp -v .vimrc ~
 cp -v .tmux.conf ~
 cp -v .bashrc ~
+mkdir -p ~/.vim/colors
+cp -v themes/simple.vim ~/.vim/colors/
 echo "Done!"
 
 echo "Installing vundle..."
