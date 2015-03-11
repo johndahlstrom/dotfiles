@@ -41,7 +41,7 @@ filetype plugin indent on
 syntax on
 set number
 set t_Co=256
-colorscheme arthur
+colorscheme simple
 set ttyfast
 set laststatus=2
 set showcmd
