@@ -1,0 +1,32 @@
+snippet func
+	function (${1}) {
+		${2}
+	}
+
+snippet funcvar
+	var ${1} = function (${2}) {
+		${3}
+	}
+
+snippet if
+	if (${1}) {
+		${2}
+	}
+
+snippet else
+	else {
+		${1}
+	}
+
+snippet for
+	for (var ${1}=0; $1 < ${2}.length; ++$1) {
+		${0}
+	}
+
+snippet forin
+	for (var ${1} in ${2}) {
+		${0}
+	}
+
+snippet cl
+	console.log(${1});

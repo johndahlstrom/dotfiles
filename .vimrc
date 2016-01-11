@@ -14,21 +14,22 @@ Plugin 'kien/ctrlp.vim'
 Plugin 'tpope/vim-commentary'
 Plugin 'tpope/vim-repeat'
 Plugin 'scrooloose/syntastic'
-Plugin 'evidens/vim-twig'
-Plugin 'tokutake/twig-indent'
 Plugin 'chase/vim-ansible-yaml'
 Plugin 'rhysd/clever-f.vim'
 Plugin 'airblade/vim-gitgutter'
 Plugin 'matze/vim-move'
 Plugin 'tmhedberg/matchit'
 Plugin 'Townk/vim-autoclose'
-Plugin 'sickill/vim-monokai'
 Plugin 'kris89/vim-multiple-cursors'
-Plugin 'altercation/vim-colors-solarized'
-Plugin 'Shougo/neocomplete.vim'
-Plugin 'Shougo/neosnippet.vim'
 
-Plugin 'guns/xterm-color-table.vim'
+Plugin 'MarcWeber/vim-addon-mw-utils'
+Plugin 'tomtom/tlib_vim'
+Plugin 'garbas/vim-snipmate'
+
+Plugin 'sheerun/vim-polyglot'
+Plugin 'gorodinskiy/vim-coloresque'
+Plugin 'tokutake/twig-indent'
+Plugin 'rking/ag.vim'
 
 Plugin 'adoy/vim-php-refactoring-toolbox'
 
@@ -41,7 +42,7 @@ filetype plugin indent on
 syntax on
 set number
 set t_Co=256
-colorscheme simple
+colorscheme base16-ocean
 set ttyfast
 set laststatus=2
 set showcmd
@@ -54,6 +55,8 @@ set cursorline
 set autoindent
 set copyindent
 
+
+
 " tell it to use an undo file
 set undofile
 " set a directory to store the undo history
@@ -62,31 +65,7 @@ set undodir=~/.vim/vimundo
 " Use Ctrl as the Move modifier (Ctrl-j & Ctrl-k)
 let g:move_key_modifier = 'C'
 
-" NeoComplete
-let g:neocomplete#enable_at_startup = 1
-let g:neocomplete#enable_smart_case = 1
-let g:neosnippet#snippets_directory='~/.vim/snippets'
-
-" <TAB>: completion.
-imap <expr><TAB> neosnippet#expandable_or_jumpable() ?
-  \ "\<Plug>(neosnippet_expand_or_jump)"
-  \: pumvisible() ? "\<C-n>" : "\<TAB>"
-" <C-h>, <BS>, <CR>: close popup and delete backword char.
-inoremap <expr><C-h> neocomplete#smart_close_popup().'\<C-h>'
-inoremap <expr><BS> neocomplete#smart_close_popup().'\<C-h>'
-inoremap <expr><C-y> neocomplete#close_popup()
-inoremap <expr><C-e> neocomplete#cancel_popup()
-inoremap <expr><C-c> neocomplete#cancel_popup()
-inoremap <expr><CR> pumvisible() ? neocomplete#close_popup() : "\<CR>"
-
-
-" For snippet_complete marker.
-if has('conceal')
-  set conceallevel=2 concealcursor=i
-endif
-
-
-" default the statusline to green when entering Vim
+" default the statusline to dark when entering Vim
 hi statusline ctermbg=236 ctermfg=255
 
 " Change color on the statusline when we enter/leave insert mode
@@ -105,15 +84,8 @@ set statusline+=\ %=            " align left
 set statusline+=Line:%l/%L      " line X of Y
 set statusline+=\ Col:%c        " current column
 
-" Fix GitGutter to be readable
-highlight clear SignColumn
-highlight GitGutterAdd ctermfg=green
-highlight GitGutterChange ctermfg=yellow
-highlight GitGutterDelete ctermfg=red
-highlight GitGutterChangeDelete ctermfg=yellow
-
-set tabstop=2
-set shiftwidth=2
+set tabstop=4
+set shiftwidth=4
 set smarttab
 set expandtab
 set hidden
@@ -158,6 +130,9 @@ nmap <silent> // :nohlsearch<cr>
 " Toggle pasting.
 map <leader>pp :setlocal paste!<cr>
 
+" Paste in last yank when in insert mode
+imap <C-v> <C-r>0
+
 " Reselect visual block after indent/outdent.
 vnoremap < <gv
 vnoremap > >gv
@@ -177,7 +152,7 @@ nnoremap <silent> ss <C-w>s
 nnoremap <c-e> 3<C-e>
 nnoremap <c-y> 3<C-y>
 
-" Copy with xclip
+" Copy with pbcopy
 map <leader>c :w !pbcopy<CR><CR>
 
 " Return to last edit position when opening files
@@ -197,13 +172,6 @@ autocmd BufNewFile,BufRead *.html.twig set ft=html.twig
 " Remove trailing whitespace
 autocmd BufWritePre *.* :%s/\s\+$//e
 autocmd BufWritePost *.* :%s/\s\+$//e
-
-autocmd BufWrite *.php NeoSnippetSource ~/.vim/snippets/php.snip
-autocmd BufNewFile,BufRead,BufWrite *.html NeoSnippetSource ~/.vim/snippets/html.snip
-autocmd BufNewFile,BufRead,BufWrite *.twig NeoSnippetSource ~/.vim/snippets/twig.snip
-autocmd BufNewFile,BufRead,BufWrite *.js NeoSnippetSource ~/.vim/snippets/javascript.snip
-
-autocmd BufNewFile,BufRead,BufWrite php.snip NeoSnippetSource ~/.vim/snippets/php.snip
 
 " Keep search matches in the middle of the window.
 nnoremap n nzzzv
@@ -236,17 +204,37 @@ nnoremap <s-right> 5<c-w>>
 nmap <Tab> :bnext<CR>
 nmap <S-Tab> :bprevious<CR>
 
+" Snipmate scopes
+let g:snipMate = {}
+let g:snipMate.scope_aliases = {}
+let g:snipMate.scope_aliases['php'] = 'php'
+let g:snipMate.scope_aliases['html'] = 'html,twig,javascript'
+let g:snipMate.scope_aliases['js'] = 'javascript'
+
+" Fix GitGutter to be readable
+highlight clear SignColumn
+highlight GitGutterAdd ctermfg=green
+highlight GitGutterChange ctermfg=yellow
+highlight GitGutterDelete ctermfg=red
+highlight GitGutterChangeDelete ctermfg=yellow
+
+" Increase the number of signs in gitgutter
+let g:gitgutter_max_signs=9999999999
+
+" Ctags
+map <leader>go <C-]>
+
 " Easymotion
 let g:EasyMotion_leader_key = '<Leader>'
 
 " Nerdtree options and mappings
 let g:NERDTreeDirArrows=0
 let NERDTreeShowHidden=1
-map <C-e> :NERDTreeToggle<CR>
+map <C-b> :NERDTreeToggle<CR>
 
 " Run codeception
-nmap <C-d> :!php codecept.phar run --steps --debug<CR>
-nmap <C-t> :!php codecept.phar run --steps<CR>
+" nmap <C-d> :!php codecept.phar run --steps --debug<CR>
+" nmap <C-t> :!php codecept.phar run --steps<CR>
 
 " Better omni-complete menu.
 set completeopt=menu,preview
@@ -257,31 +245,46 @@ map <C-f> :CtrlPBufTag<CR>
 " Symfony, clear cache
 map <leader>cc :!rm -Rv app/cache/*<CR>
 
+" Symfony generate setter and getter for entity
+map <leader>ge :GenerateSetterAndGetter<CR>
+command! GenerateSetterAndGetter call GenerateSetterAndGetter()
+
+function! GenerateSetterAndGetter()
+    let path = expand('%:p')
+
+    let matches = matchlist(path, '\(.\+\)\/src\/\(.\+\)\/\(.\+\)\/Entity\/\(.\+\)\.php')
+    if len(matches) > 0
+      execute(printf('!php app/console doctrine:generate:entities %s%s:%s --no-backup', matches[2], matches[3], matches[4]))
+    else
+      echo 'This is no entity'
+    endif
+endfunction
+
+" PHP-CS-Fixer
+map <leader>pfix :!php-cs-fixer fix %:p --level=psr2
+
 
 " Source and edit vimrc
 map <leader>vimrc :so ~/.vimrc<CR>
 map <leader>evimrc :e ~/.vimrc<CR>
 
 " Edit snippets
-map <leader>ephp :e ~/.vim/snippets/php.snip<CR>
-map <leader>ehtml :e ~/.vim/snippets/html.snip<CR>
-map <leader>ejs :e ~/.vim/snippets/javascript.snip<CR>
-map <leader>etwig :e ~/.vim/snippets/twig.snip<CR>
+map <leader>ephp :e ~/.vim/snippets/php.snippets<CR>
+map <leader>ehtml :e ~/.vim/snippets/html.snippets<CR>
+map <leader>ejs :e ~/.vim/snippets/javascript.snippets<CR>
+map <leader>etwig :e ~/.vim/snippets/twig.snippets<CR>
 
-" lets make escape a little more accessible
-inoremap jj <esc>
 
 " Faster save
 nmap <leader>w :w<cr>
 
-let g:gitgutter_max_signs=9999999999
 
 " replace currently selected text
 vmap <Leader>r "sy:%s/<C-R>"/
 
 
 " Run PhpSpec
-map <leader>ps :!php bin/phpspec run --format=pretty<CR>
+map <leader>ps :!bin/phpspec run --format=pretty<CR>
 
 " switch between controller and spec file
 map <leader>sw :SwitchBetweenControllerAndSpec<CR>
@@ -314,4 +317,13 @@ function! SwitchBetweenControllerAndSpec()
     endif
     echo 'Current file is not a spec nor php file.'
 endfunction
+
+if ! has('gui_running')
+  set ttimeoutlen=10
+  augroup FastEscape
+    autocmd!
+    au InsertEnter * set timeoutlen=0
+    au InsertLeave * set timeoutlen=1000
+  augroup END
+endif
 

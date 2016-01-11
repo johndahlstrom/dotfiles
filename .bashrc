@@ -72,16 +72,33 @@ if [ -x /usr/bin/dircolors ]; then
     alias fgrep='fgrep --color=auto'
     alias egrep='egrep --color=auto'
 fi
+export GREP_OPTIONS='--color=always'
+export GREP_COLOR='1;36;40'
 
 # some more ls aliases
 alias ll='ls -alF'
 alias la='ls -A'
 alias l='ls -CF'
 alias ..='cd ..'
-alias ls='ls --color=auto'
+alias ls='ls -G'
+
+# LESS
 alias less='less -XF'
+
+# TMUX
 alias tm='tmux -2'
 alias tmux='tmux -2'
+
+# GIT
+alias gd='git diff'
+alias gs='git status'
+alias ga='git add'
+alias gc='git commit'
+alias gcm='git commit -m'
+alias gp='git push'
+alias gg='git pull'
+alias gl='git log'
+alias g='git'
 
 
 # Extract Files
@@ -170,7 +187,8 @@ junk_check ()
     [[ -f ".thumbs" ]] && echo "$junk_mark"
 }
 
-# Thy holy prompt.
-PROMPT_COMMAND='PS1="\[\e[0;31m\]┌─[\t] \[\e]2;\u@\h:\w\a\]${c_path}\w${c_reset}$(git_prompt)$(jobs_check)$(junk_check)\n\[\e[0;31m\]└──\[\e[0;31m\]──╼\[\e[0m\]  "'
-#PS1="\[\e[01;37m\]┌─[\t][$]: \w\[\e[01;37m\]\n\[\e[01;37m\]└──\[\e[01;37m\]──╼\[\e[0m\] "
+# Ze prompt
+PROMPT_COMMAND='PS1="\[\e[0;31m\][\t] \[\e]2;\u@\h:\w\a\]${c_path}\w${c_reset}$(git_prompt)$(jobs_check)$(junk_check)\n\[\e[0;31m\]\[\e[0;31m\]$ \[\e[0m\]  "'
+
+export PATH=~/.composer/vendor/bin:$PATH
 

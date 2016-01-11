@@ -1,0 +1,34 @@
+snippet bl
+	{% block ${1} %}
+		${2}
+	{% endblock $1 %}
+
+snippet if
+	{% if ${1} %}
+		${2}
+	{% endif %}
+
+snippet elseif
+	{% elseif ${1} %}
+		${2}
+
+snippet else
+	{% else %}
+		${1}
+
+snippet endif
+	{% endif %}
+
+snippet for
+	{% for ${1} in ${2} %}
+		${3}
+	{% endfor %}
+
+snippet endfor
+	{% endfor %}
+
+snippet dump
+	{{ dump(${1}) }}
+
+snippet set
+	{% set ${1} = ${2} %}

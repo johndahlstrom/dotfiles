@@ -1,0 +1,182 @@
+snippet html
+	<!DOCTYPE html>
+	<html>
+		<head>
+			<meta http-equiv="content-type" content="text/html; charset=utf-8">
+			<title>${1}</title>
+			<link rel="stylesheet" href="${3}.css" type="text/css" charset="utf-8">
+			${4}
+		</head>
+		<body>
+			${5}
+		</body>
+	</html>
+
+snippet script
+	<script type="text/javascript">
+		${1}
+	</script>
+
+snippet body
+	<body>
+		${1}
+	</body>
+
+snippet h1
+	<h1>${1}</h1>
+
+snippet h2
+	<h2>${1}</h2>
+
+snippet h3
+	<h3>${1}</h3>
+
+snippet p
+	<p>${1}</p>
+
+snippet br
+	<br />
+
+snippet hr
+	<hr />
+
+snippet comment
+	<!--${1}-->
+
+snippet b
+	<b>${1}</b>
+
+snippet small
+	<small>${1}</small>
+
+snippet strong
+	<strong>${1}</strong>
+
+snippet sub
+	<sub>${1}</sub>
+
+snippet sup
+	<sup>${1}</sup>
+
+snippet ins
+	<ins>${1}</ins>
+
+snippet del
+	<del>${1}</del>
+
+snippet em
+	<em>${1}</em>
+
+snippet pre
+	<pre>
+		${1}
+	</pre>
+snippet blockquote
+	<blockquote>
+		${1}
+	</blockquote>
+
+
+snippet a
+	<a href="${1}">${2}</a>
+
+snippet ablank
+	<a href="${1}" target="_blank">${2}</a>
+
+snippet aparent
+	<a href="${1}" target="_parent">${2}</a>
+
+snippet atop
+	<a href="${1}" target="_top">${2}</a>
+
+snippet iframe
+	<iframe src="${1}"></iframe>
+
+snippet table
+	<table border="${1}">
+	${2}
+	</table>
+
+snippet th
+	<th>${1}</th>
+
+snippet ul
+	<ul>
+		${1}
+	</ul>
+
+snippet li
+	<li>${1}</li>
+
+snippet li.
+	<li class='${1}'>${2}</li>
+
+snippet li#
+	<li id='${1}'>${2}</li>
+
+snippet form
+	<form>
+	  ${1}
+	</form>
+
+snippet input
+	<input type="${1}" name="${2}">
+
+snippet inputtext
+	<input type="text" name="${1}">
+
+snippet inputradio
+	<input type="radio" name="${1}" value="${2:value}">
+
+snippet inputcheckbox
+	<input type="checkbox" name="${1}">
+
+snippet label
+	<label>${1}</label>
+
+snippet labelfor
+	<label for="${1}:id">${2}</label>
+
+snippet id
+	id="${1}"
+
+snippet class
+	class="${1}"
+
+snippet div
+	<div>${1}</div>
+
+snippet div#
+	<div id="${1}">${2}</div>
+
+snippet div.
+	<div class="${1}">${2}</div>
+
+snippet span
+	<span>${1}</span>
+
+snippet span#
+	<span id="${1}">${2}</span>
+
+snippet span.
+	<span class="${1}">${2}</span>
+
+snippet button
+	<button>${1}</button>
+
+snippet button#
+	<button id="${1}">${2}</button>
+
+snippet button.
+	<button class="${1}">${2}</button>
+
+snippet img
+	<img src="${1}">
+
+snippet select
+	<select>
+		${1}
+	</select>
+
+snippet option
+	<option value='${1}'>${2}</option>
