@@ -4,7 +4,7 @@ cp -v .tmux.conf ~
 cp -v .bash_profile ~
 cp -v .bashrc ~
 mkdir -p ~/.vim/colors
-cp -v themes/simple.vim ~/.vim/colors/
+cp -v themes/*.vim ~/.vim/colors/
 echo "Done!"
 
 echo "Installing vundle..."

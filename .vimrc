@@ -43,6 +43,7 @@ syntax on
 set number
 set t_Co=256
 colorscheme base16-ocean
+set background=dark
 set ttyfast
 set laststatus=2
 set showcmd
