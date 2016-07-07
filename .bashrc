@@ -100,6 +100,11 @@ alias gg='git pull'
 alias gl='git log'
 alias g='git'
 
+# LARAVEL
+alias art='php artisan'
+
+# SYMFONY
+alias con='php app/console'
 
 # Extract Files
 extract() {
